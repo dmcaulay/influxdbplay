@@ -44,7 +44,8 @@ func main() {
 	// }
 
 	// js example in go
-	startTime := time.Now().Add(-24 * time.Hour)
+	duration := 24 * time.Hour
+	startTime := time.Now().Add(-duration)
 	eventTypes := []string{"click", "view", "post", "comment"}
 
 	cpuSeries := &client.Series{
@@ -60,7 +61,7 @@ func main() {
 	}
 
 	r := rand.New(rand.NewSource(startTime.UnixNano()))
-	for i := time.Duration(0); i < 24*time.Hour; i += time.Minute {
+	for i := time.Duration(0); i < duration; i += time.Minute {
 		currentTimeMs := startTime.Add(i).UnixNano() / int64(time.Millisecond)
 
 		hostName := fmt.Sprintf("server%d", r.Intn(100))
